@@ -1,0 +1,47 @@
+{% extends "base-with-banner.html" %}
+
+{% block description %}{{ board_subtitle }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/board_write.css">
+    <link rel="stylesheet" href="/static/css/dropzone.css">
+{% endblock %}
+{% block scripts %}
+    <script src="/static/js/jquery.dropzone.js"></script>
+    <script src="/static/js/board_write.js"></script>
+{% endblock %}
+
+
+{% block boardImg %}'/static/img/signin.jpg'{% endblock %}
+{% block boardTitle %}{{ board_title }}{% endblock %}
+{% block boardSubTitle %}{{ board_subtitle }}{% endblock %}
+
+{% block contents %}
+    <div class="board-write">
+        <div class="container">
+            <form action="/post/{{ board }}/write/" method="post" enctype="multipart/form-data" class="classic-form write-form" data-file-action="/file/notice/">
+                {% csrf_token %}
+                <input type="hidden" name="dropzone-token" id="dropzone-token" value="{{ random_str }}">
+                <div class="form-box">
+                    <select name="tag" class="bordered inline">
+                        <option value="공지">공지</option>
+                        <option value="행사">행사</option>
+                        <option value="대회">대회</option>
+                        <option value="공모전">공모전</option>
+                    </select>
+                </div>
+                <div class="form-box">
+                    <input type="text" name="title" class="bordered" required placeholder="제목을 입력해주세요">
+                </div>
+                <div class="form-box">
+                    {{ form.media }}
+                    {{ form.as_p }}
+                </div>
+                <div class="form-box dropzone" id="dropzone"></div>
+                <div class="form-box buttons">
+                    <button type="submit">작성</button>
+                </div>
+            </form>
+        </div> <!-- container -->
+    </div> <!-- board-view -->
+{% endblock %}

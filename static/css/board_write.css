@@ -1,0 +1,33 @@
+.board-write { margin-top:50px; }
+.board-write .write-form { margin:0 auto; }
+.board-write textarea { min-height:300px; padding:5px; }
+.board-write .form-box { margin-bottom:10px; }
+.board-write select { min-width:150px; }
+.board-write .dropzone { min-height:100px; border:1px solid #ddd; }
+.board-write .dropzone.dz-drag-hover { background-color:#eaeaea; }
+.board-write .buttons { text-align:right; }
+.board-write .buttons button { width:100px; height:40px; font-size:16px; background-color:#014f99; border:0; color:#fff; }
+.board-write .form-box .col-sm-6 input { margin-top:0; }
+
+
+/* pc */
+@media (min-width:768px) {
+	.board-write .form-box .col-sm-6:first-child { padding-right:5px; }
+	.board-write .form-box .col-sm-6:last-child { padding-left:5px; }
+}
+
+/* md */
+@media (min-width:992px) {
+	.board-write .write-form { width:900px; }
+}
+
+/* sm */
+@media (min-width:768px) and (max-width:991px) {
+	.board-write .write-form { width:750px; }
+}
+
+/* xs */
+@media (max-width:767px) {
+	.board-write .write-form { width:100%; }
+	.board-write .form-box .col-sm-6:first-child { margin-bottom:10px; }
+}

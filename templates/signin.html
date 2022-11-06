@@ -1,0 +1,50 @@
+{% extends "base-with-banner.html" %}
+
+{% block description %}D.Com의 로그인 페이지{% endblock %}
+{% block title %}Sign in - D.Com{% endblock %}
+{% block css %}<link rel="stylesheet" href="/static/css/signin.css">{% endblock %}
+{% block scripts %}<script src="/static/js/signin.js"></script>{% endblock %}
+
+{% block boardImg %}'/static/img/signin.jpg'{% endblock %}
+{% block boardTitle %}Sign In{% endblock %}
+{% block boardSubTitle %}찾아주셔서 감사합니다!{% endblock %}
+
+{% block contents %}
+			<!-- /skin/member/signin/signin.skin.html 파일 내용과 동일 -->
+			<div class="signin">
+                <p align="center">
+                    {{ message }}
+                </p>
+				<div class="container">
+					<form action="./?next={{ next_url }}" class="classic-form" method="post">
+                        {% csrf_token %}
+						<div class="form-box">
+							<label for="id" class="required">
+								아이디
+							</label>
+							<input type="text" id="id" name="userId" required>
+						</div>
+						<div class="form-box">
+							<label for="password" class="required">
+								비밀번호
+							</label>
+							<input type="password" id="password" name="password" required>
+						</div>
+						<div class="row form-bottom">
+							<div class="col-sm-3 col-right button-box">
+								<button class="btn btn-blue">로그인</button>
+							</div>
+							<div class="col-sm-6 link">
+								<ul>
+									<li><a href="/user/signup">회원가입</a></li>
+									<li><a href="#link-find-account">아이디 / 비밀번호 찾기</a></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div> <!-- container -->
+			</div> <!-- signin -->
+			<!-- /skin/member/signin/signin.skin.html 파일 내용과 동일 끝 -->
+
+		<!-- 여기 아래부터 footer 파일로 분리하면 됩니다. -->
+{% endblock %}
