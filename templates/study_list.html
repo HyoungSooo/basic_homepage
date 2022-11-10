@@ -18,21 +18,17 @@
                         <div class="post-container">
                             <h2>
                                 <a href="/post/{{ board }}/{{ post.id }}">
-                                    {% if post.tag == "교과" %}
+                                    {% if post.tag == "수상" %}
                                         <span class="category category-1">
-                                            교과
+                                            수상
                                         </span>
-                                    {% elif post.tag == "데이터" %}
+                                    {% elif post.tag == "발표" %}
                                         <span class="category category-2">
-                                            데이터
+                                            발표
                                         </span>
-                                    {% elif post.tag == "프론트" %}
+                                    {% elif post.tag == "학회" %}
                                         <span class="category category-3">
-                                            프론트
-                                        </span>
-                                    {% elif post.tag == "백" %}
-                                        <span class="category category-4">
-                                            백
+                                            학회
                                         </span>
                                     {% else %}
                                         <span class="category category-1">
@@ -50,11 +46,7 @@
                             <ul class="post-etc">
                                 <li>
                                     <i class="far fa-calendar-alt"></i>
-                                    {{ post.startDate }} - {{ post.endDate }}
-                                </li>
-                                <li>
-                                    <i class="far fa-clock"></i>
-                                    {{ post.time }}
+                                    {{ post.writedAt }}
                                 </li>
                             </ul>
                         </div> <!-- post-container -->

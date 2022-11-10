@@ -18,12 +18,14 @@
 	<script src="/static/js/jquery.bxslider.min.js"></script>
 	<script src="/static/js/jquery.touchSwipe.min.js"></script>
 	<script src="/static/js/layout.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+  <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 	{% block scripts %}{% endblock %}
 </head>
 <body>
 	<div class="wrapper">
 		<div class="header">
-			<div class="container">
+			<div class="container_de">
 				<div class="top row">
 					<div class="left logo hidden-xs">
 						<a href="/"><img src="/static/img/logo.png"></a>
@@ -35,18 +37,35 @@
 						<div class="visible-xs mobile-menu-top">
 							메뉴
 						</div>
-						<ul>
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/info">Info</a></li>
+            <ul>
+							{% comment %} <li class="active"><a href="/">Home</a></li> {% endcomment %}
+							<li><a href="/info">About</a><ul class="dropdown">
+                <li><a href="/info">Introduction</a></li>
+                <li><a href="{% url 'location' %}">Location</a></li>
+								</ul></li>
 							<li>
-								<a href="/board">Board</a>
+							<li><a href="{% url 'members' %}">Members</a><ul class="dropdown">
+                <li><a href="{% url 'professor' '장순응' %}">Professor</a></li>
+                <li><a href="{% url 'members' %}">Members</a></li>
+								</ul></li>
+							<li>
+                <li><a href="{% url 'members' %}">Research</a><ul class="dropdown">
+                <li><a href="{% url 'project' %}">Projects</a></li>
+                <li><a href="{% url 'research' %}">Research</a></li>
+								</ul></li>
+							<li>
+							<li><a href="{% url 'publictaions' 'paper' %}">Publications</a><ul class="dropdown">
+                <li><a href="{% url 'publictaions' 'paper' %}">Papers</a></li>
+                <li><a href="{% url 'publictaions' 'confer' %}">Conferences</a></li>
+                <li><a href="{% url 'patents' %}">Patents</a></li>
+								</ul></li>
+							<li>
+              <a href="/post/notice/list/">Activity</a>
 								<ul class="dropdown">
 									<li><a href="/post/notice/list/">Notice</a></li>
-                                    <li><a href="/post/activity/list/">Activity</a></li>
-									<li><a href="/post/share/list/">Share</a></li>
-                                    <li><a href="/post/free/list/">Free</a></li>
-                                    <li><a href="/post/Jokbp/list/">Jokbo</a></li>
-								    <li><a href="/post/study/list/">Study</a></li>
+                  <li><a href="/post/activity/list/">Activity</a></li>
+                  <li><a href="/post/free/list/">News</a></li>
+                  <li><a href="/post/study/list/">Outstanding</a></li>
 								</ul>
 							</li>
 							{% if request.user.is_authenticated %}
@@ -60,13 +79,13 @@
 						<button><i class="fas fa-bars"></i></button>
 					</div>
 				</div> <!-- top -->
-			</div> <!-- container -->
+			</div> <!-- container_de -->
 		</div> <!-- header-->
         <div class="content">
             <div class="banner sub-banner">
                 <ul>
                     <li style="background-image:url({% block boardImg %}{% endblock %});">
-                        <div class="container">
+                        <div class="container_de">
                             <div class="banner-content">
                                 <div class="banner-subject">
                                     {% block boardTitle %}{% endblock %}
@@ -77,7 +96,7 @@
                             </div> <!-- banner-content -->
                             <div class="banner-icon hidden-xs">
                             </div>
-                        </div> <!-- container -->
+                        </div> <!-- container_de -->
                     </li>
                 </ul>
             </div> <!-- banner -->
@@ -85,7 +104,7 @@
         </div>
 		<div class="footer">
 			<div class="footer-menu">
-				<div class="container">
+				<div class="container_de">
 					<div class="row">
 						<ul>
 							<li><a href="/privacy">개인정보취급방침</a></li>
@@ -93,9 +112,9 @@
 							<li><a href="#link-noemail">이메일무단수집거부</a></li>
 						</ul>
 					</div> <!-- row -->
-				</div> <!-- container -->
+				</div> <!-- container_de -->
 			</div> <!-- footer-menu -->
-			<div class="container">
+			<div class="container_de">
 				<div class="footer-logo hidden-xs">
 					<img src="/static/img/footer_logo.png">
 				</div>
@@ -105,7 +124,7 @@
 				<div class="footer-copyright">
 					Copyright &copy; <strong>D.Com</strong>. All rights reserved.
 				</div>
-			</div> <!-- container -->
+			</div> <!-- container_de -->
 		</div> <!-- footer -->
 	</div> <!-- wrapper -->
 	<div class="mobile-menu-mask" style="display:none;"></div>

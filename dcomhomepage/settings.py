@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'post.apps.PostConfig',
     'info.apps.InfoConfig',
     'api.apps.ApiConfig',
+    'member.apps.MemberConfig',
+    'journal.apps.JournalConfig',
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
@@ -138,6 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 CKEDITOR_FILENAME_GENERATOR = 'dcomhomepage.utils.getfilename'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True

@@ -1,57 +1,57 @@
 {% extends "base.html" %}
 {% load post_timefilter %}
+{% load static %}
 
 {% block css %}<link rel="stylesheet" href="/static/css/main.css">{% endblock %}
 {% block scripts %}<script src="/static/js/main.js"></script>{% endblock %}
-
 {% block contents %}
     <div class="content">
 			<div class="banner">
 				<ul>
-					<li style="background-image:url('/static/img/slider_1.jpg');">
-						<div class="container">
+					<li style="background-image:url('/static/img/index_img/r1.jpg');">
+						<div class="container_de">
 							<div class="banner-content">
 								<div class="banner-subject">
-									D.Com
+									CNC LAB
 								</div>
 								<div class="banner-description">
 									Big Data 시대,<br>
 									Data를 통해 세상을 바꿉니다.
 								</div>
 								<div class="banner-button">
-									<a href="/info"><button>동아리 소개</button></a>
+									<a href="/info"><button>연구실 소개</button></a>
 								</div>
 							</div> <!-- banner-content -->
 							<div class="banner-icon hidden-xs">
 							</div>
-						</div> <!-- container -->
+						</div> <!-- container_de -->
 					</li>
-					<li style="background-image:url('/static/img/slider_2.jpg');">
-						<div class="container">
+					<li style="background-image:url('/static/img/index_img/r2.jpg');">
+						<div class="container_de">
 							<div class="banner-content">
 								<div class="banner-subject">
-									D.Com
+									CNC LAB
 								</div>
 								<div class="banner-description">
-									D.Com 사람들이 여러분들에게,<br>
+									CNC LAB 사람들이 여러분들에게,<br>
 									도움을 주고 싶어 합니다.
 								</div>
 								<div class="banner-button">
-									<a href="/post/free/list"><button>정보 공유 게시판</button></a>
+									<a href="/post/free/list"><button>Research Area</button></a>
 								</div>
 							</div> <!-- banner-content -->
 							<div class="banner-icon hidden-xs">
 							</div>
-						</div> <!-- container -->
+						</div> <!-- container_de -->
 					</li>
-					<li style="background-image:url('/static/img/slider_3.jpg');">
-						<div class="container">
+					<li style="background-image:url('/static/img/index_img/r3.jpg');">
+						<div class="container_de">
 							<div class="banner-content">
 								<div class="banner-subject">
-									D.Com
+									CNC LAB
 								</div>
 								<div class="banner-description">
-									D.com 사람들은<br>
+									CNC LAB 사람들은<br>
 									뭘 하고 지낼까요?
 								</div>
 								<div class="banner-button">
@@ -60,104 +60,239 @@
 							</div> <!-- banner-content -->
 							<div class="banner-icon hidden-xs">
 							</div>
-						</div> <!-- container -->
+						</div> <!-- container_de -->
+					</li>
+					<li style="background-image:url('/static/img/index_img/r4.png');">
+						<div class="container_de">
+							<div class="banner-content">
+								<div class="banner-subject">
+									CNC LAB
+								</div>
+								<div class="banner-description">
+									CNC LAB 사람들을<br>
+									소개합니다
+								</div>
+								<div class="banner-button">
+									<a href="/info/members"><button>Members</button></a>
+								</div>
+							</div> <!-- banner-content -->
+							<div class="banner-icon hidden-xs">
+							</div>
+						</div> <!-- container_de -->
 					</li>
 				</ul>
 			</div> <!-- banner -->
 
-		<!-- 여기 위까지 header 파일로 분리하면 됩니다. -->
+		  <!-- 여기 위까지 header 파일로 분리하면 됩니다. -->
+      
+      <div class="container_de mb-4 border-b border-gray-200 dark:border-gray-700 mt-10">
+    <p class=" section-header text-3xl text-gray-900 dark:text-white mb-5">Research Areas</p>
+
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{research1.one_word_title}}</button>
+        </li>
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{{research2.one_word_title}}</button>
+        </li>
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">{{research3.one_word_title}}</button>
+        </li>
+        <li role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">{{research4.one_word_title}}</button>
+        </li>
+    </ul>
+</div>
+  <div class="container_de ">
+    <div id="myTabContent">
+      <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center justify-between">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div class="p-4">
+              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{research1.title}}
+              </h1>
+              <p class="mb-8 leading-relaxed">{{research1.des}}</p>
+              <a href="{{research1.get_absolute_url}}" class="herf">
+              <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Detail</button>
+              </a>
+            </div>
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded" alt="hero" src="{{research1.img.url}}">
+          </div>
+        </div>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div class="p-4">
+              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{research2.title}}
+              </h1>
+              <p class="mb-8 leading-relaxed">{{research2.des}}</p>
+                            <a href="{{research1.get_absolute_url}}" class="herf">
+              <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Detail</button>
+              </a>
+            </div>
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded" alt="hero" src="{{research2.img.url}}">
+          </div>
+        </div>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div class="p-4">
+              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{research3.title}}
+              </h1>
+              <p class="mb-8 leading-relaxed">{{research3.des}}</p>
+                            <a href="{{research1.get_absolute_url}}" class="herf">
+              <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Detail</button>
+              </a>
+            </div>
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded" alt="hero" src="{{research3.img.url}}">
+          </div>
+        </div>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div class="p-4">
+              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{research4.title}}
+              </h1>
+              <p class="mb-8 leading-relaxed">{{research4.des}}</p>
+                            <a href="{{research1.get_absolute_url}}" class="herf">
+              <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Detail</button>
+              </a>  
+            </div>
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded" alt="hero" src="{{research4.img.url}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<section class="text-gray-600 body-font">
+  <div class="container_de py-24 mx-auto">
+    <div class="flex -m-4 text-center flex-wrap justify-between">
+      <div class="p-4 md:text-lg sm:w-1/4 w-1/4">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">2.7K</h2>
+        <p class="leading-relaxed">Completed Projects</p>
+      </div>
+      <div class="p-4 md:text-lg sm:w-1/4 w-1/4">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">1.8K</h2>
+        <p class="leading-relaxed">Publications</p>
+      </div>
+      <div class="p-4 md:text-lg sm:w-1/4 w-1/4">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">35</h2>
+        <p class="leading-relaxed">Research Members</p>
+      </div>
+      <div class="p-4 md:text-lg sm:w-1/4 w-1/4">
+        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">4</h2>
+        <p class="leading-relaxed">Winning Awards</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 			<!-- /skin/latest/notice/latest.skin.html 파일 내용과 동일 -->
-		<div class="container">
-            <div class="latest-gallery">
-                <h2 class="section-header">
-                    활동내역
-                </h2>
-                <div class="latest-gallery-list">
-                    <ul class="row">
-                        {% for activity in activities %}
-                        <li class="col-xs-6 col-sm-4 col-lg-3">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="/post/activity/{{activity.id}}/"><img src="{{activity.imageLink}}"></a>
-                                </div>
-                                <div class="list-content">
-                                    {% if activity.tag == "공지" %}
-                                        <span class="category category-1">
-                                            <a href="#link-board-notice-view">공지</a>
-                                        </span>
-                                    {% elif activity.tag == "행사" %}
-                                        <span class="category category-2">
-                                            <a href="#link-board-notice-view">행사</a>
-                                        </span>
-                                    {% elif activity.tag == "대회" %}
-                                        <span class="category category-3">
-                                            <a href="#link-board-notice-view">대회</a>
-                                        </span>
-                                    {% elif activity.tag == "프젝" %}
-                                        <span class="category category-4">
-                                            <a href="#link-board-notice-view">프젝</a>
-                                        </span>
-                                    {% else %}
-                                        <span class="category category-1">
-                                            <a href="#link-board-notice-view">기타</a>
-                                        </span>
-                                    {% endif %}
-                                    <span class="title">
-                                        <a href="/post/notice/{{activity.id}}/">{{ activity.title }}</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="hidden-xs slide slide-left">
-                        <button><i class="fas fa-caret-left"></i></button>
-                    </div>
-                    <div class="hidden-xs slide slide-right">
-                        <button><i class="fas fa-caret-right"></i></button>
-                    </div>
-                </div> <!-- latest-gallery-list -->
-            </div> <!-- latest-gallery -->
-            <div class="row">
-                <div class="col-sm-6 latest-board">
-                    <h2 class="section-header">공지사항</h2>
-                    <ul>
-                        {% for notice in notices %}
-                        <li>
-                            <strong>[{{ notice.tag }}]</strong>
-                            <a href="/post/notice/{{ notice.id }}/">{{ notice.title }}</a>
-                            <span class="date">{{ notice.writedAt|timesince|time_ego_to_korean }}</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div> <!-- latest-board -->
-                <div class="col-sm-6 latest-board">
-                    <h2 class="section-header">정보공유</h2>
-                    <ul>
-                        {% for share in shares %}
-                        <li>
-                            <strong>[{{ notice.tag }}]</strong>
-                            <a href="/post/share/{{ notice.id }}/">{{ share.title }}</a>
-                            <span class="date">{{ share.writedAt|timesince|time_ego_to_korean }}</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div> <!-- latest-board -->
-            </div> <!-- row -->
-            <div class="latest-board">
-                <h2 class="section-header">자유게시판</h2>
-                <ul>
-                    {% for free in frees %}
-                    <li>
-                        <strong>[{{ notice.tag }}]</strong>
-                        <a href="/post/free/{{ notice.id }}/">{{ free.title }}</a>
-                        <span class="date">{{ free.writedAt|timesince|time_ego_to_korean }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div> <!-- latest-board -->
+		<div class="container_de">
+      <div class="latest-gallery">
+          <h2 class="section-header">
+              활동내역
+          </h2>
+          <div class="latest-gallery-list">
+              <ul class="row">
+                  {% for activity in activities %}
+                  <li class="col-xs-6 col-sm-4 col-lg-3">
+                      <div class="inner">
+                          <div class="thumbnail">
+                              <a href="/post/activity/{{activity.id}}/"><img src="{{activity.imageLink}}"></a>
+                          </div>
+                          <div class="list-content">
+                              {% if activity.tag == "공지" %}
+                                  <span class="category category-1">
+                                      <a href="#link-board-notice-view">공지</a>
+                                  </span>
+                              {% elif activity.tag == "행사" %}
+                                  <span class="category category-2">
+                                      <a href="#link-board-notice-view">행사</a>
+                                  </span>
+                              {% elif activity.tag == "대회" %}
+                                  <span class="category category-3">
+                                      <a href="#link-board-notice-view">대회</a>
+                                  </span>
+                              {% elif activity.tag == "프젝" %}
+                                  <span class="category category-4">
+                                      <a href="#link-board-notice-view">프젝</a>
+                                  </span>
+                              {% else %}
+                                  <span class="category category-1">
+                                      <a href="#link-board-notice-view">기타</a>
+                                  </span>
+                              {% endif %}
+                              <span class="title">
+                                  <a href="/post/notice/{{activity.id}}/">{{ activity.title }}</a>
+                              </span>
+                          </div>
+                      </div>
+                  </li>
+                  {% endfor %}
+              </ul>
+              <div class="hidden-xs slide slide-left">
+                  <button><i class="fas fa-caret-left"></i></button>
+              </div>
+              <div class="hidden-xs slide slide-right">
+                  <button><i class="fas fa-caret-right"></i></button>
+              </div>
+          </div> <!-- latest-gallery-list -->
+      </div> <!-- latest-gallery -->
+      <div class="row">
+          <div class="col-sm-6 latest-board">
+              <h2 class="section-header">공지사항</h2>
+              <ul>
+                  {% for notice in notices %}
+                  <li>
+                      <strong>[{{ notice.tag }}]</strong>
+                      <a href="/post/notice/{{ notice.id }}/">{{ notice.title }}</a>
+                      <span class="date">{{ notice.writedAt|timesince|time_ego_to_korean }}</span>
+                  </li>
+                  {% endfor %}
+              </ul>
+          </div> <!-- latest-board -->
+          <div class="col-sm-6 latest-board">
+              <h2 class="section-header">Outstanding</h2>
+              <ul>
+                  {% for share in shares %}
+                  <li>
+                      <strong>[{{ share.tag }}]</strong>
+                      <a href="/post/study/{{ share.id }}/">{{ share.title }}</a>
+                      <span class="date">{{ share.writedAt|timesince|time_ego_to_korean }}</span>
+                  </li>
+                  {% endfor %}
+              </ul>
+          </div> <!-- latest-board -->
+      </div> <!-- row -->
+      <div class="latest-board">
+          <h2 class="section-header">News</h2>
+          <ul>
+              {% for free in frees %}
+              <li>
+                  <strong>[{{ free.tag }}]</strong>
+                  <a href="/post/free/{{ free.id }}/">{{ free.title }}</a>
+                  <span class="date">{{ free.writedAt|timesince|time_ego_to_korean }}</span>
+              </li>
+              {% endfor %}
+          </ul>
+      </div> <!-- latest-board -->
 
-        </div> <!-- container -->
-    </div> <!-- content -->
+    </div> <!-- container_de -->
+  </div> <!-- content -->
+  
+
+
+
 {% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base-with-banner.html' %}
+
+{% block boardImg %}'/static/img/signin.jpg'{% endblock %}
+{% block boardTitle %}Location{% endblock %}
+{% block boardSubTitle %}찾아오시는길{% endblock %}
+
+{% block contents %}
+
+<div class = "container_de mt-4">
+  <h3 class="text-3xl font-bold dark:text-white mb-10 mt-4">Active</h3>
+  <div class="overflow-x-auto relative">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="py-3 px-6 rounded-l-lg w-4/6">
+                      title
+                  </th>
+                  <th scope="col" class="py-3 px-6 w-1/6">
+                      duration
+                  </th>
+                  <th scope="col" class="py-3 px-6 rounded-r-lg w-1/6">
+                      ordering
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+                {% for obj in active %}
+              <tr class="bg-white dark:bg-gray-800 w-full">
+                  <th scope="row" class="block w-full py-4 px-6 font-medium text-gray-900 break-all dark:text-white">
+                      {{obj.title}}
+                  </th>
+                  <td class="py-4 px-6">
+                      {{obj.start_date}} ~ {{obj.end_date}}
+                  </td>
+                  <td class="py-4 px-6">
+                      {{obj.ordering}}
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+</div>
+
+<div class = "container_de mt-4">
+  <h3 class="text-3xl font-bold dark:text-white mb-10 mt-4">Finish</h3>
+  <div class="overflow-x-auto relative">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="py-3 px-6 rounded-l-lg w-4/6">
+                      title
+                  </th>
+                  <th scope="col" class="py-3 px-6 w-1/6">
+                      duration
+                  </th>
+                  <th scope="col" class="py-3 px-6 rounded-r-lg w-1/6">
+                      ordering
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+                {% for obj in finish %}
+              <tr class="bg-white dark:bg-gray-800 w-full">
+                  <th scope="row" class="block w-full py-4 px-6 font-medium text-gray-900 break-all dark:text-white">
+                      {{obj.title}}
+                  </th>
+                  <td class="py-4 px-6">
+                    {% if end_date %}
+                      {{obj.start_date}} ~ {{obj.end_date}}
+                    {% else %}
+                      {{obj.start_date}} ~ Now
+                    {% endif %}
+                  </td>
+                  <td class="py-4 px-6">
+                      {{obj.ordering}}
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+</div>
+
+{% endblock contents %}

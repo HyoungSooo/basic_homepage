@@ -1,0 +1,79 @@
+{% extends 'base-with-banner.html' %}
+
+{% block boardImg %}'/static/img/signin.jpg'{% endblock %}
+{% block boardTitle %}Member{% endblock %}
+{% block boardSubTitle %}Team Member{% endblock %}
+
+{% block contents %}
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+      <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">PH.D</h2>
+
+      </div> 
+      <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+        {% for obj in PH_D %}
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 w-full h-full"
+          >
+              <a href="{% url 'member_detail' obj.id %}" class ="block w-64 h-64 mx-auto" style ="background-image : url({{obj.img.url}}); background-size: cover;">
+              </a>
+              <div class="p-5 w-1/2 md:text-center">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="{% url 'member_detail' obj.id %}">{{obj.name}}</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">{{obj.position}}</span>
+              </div>
+          </div> 
+        {% endfor %}
+      </div>  
+  </div>
+</section>
+
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+      <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Post Graduate</h2>
+
+      </div> 
+      <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+        {% for obj in Post_Graduate %}
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 w-full h-full"
+          >
+              <a href="{% url 'member_detail' obj.id %}" class ="block w-64 h-64 mx-auto" style ="background-image : url({{obj.img.url}}); background-size: cover;">
+              </a>
+              <div class="p-5 w-1/2 md:text-center">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="{% url 'member_detail' obj.id %}">{{obj.name}}</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">{{obj.position}}</span>
+              </div>
+          </div> 
+        {% endfor %}
+      </div>  
+  </div>
+</section>
+
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+      <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">UnderGraduate</h2>
+
+      </div> 
+      <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+        {% for obj in Undergraduate %}
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 w-full h-full"
+          >
+              <a href="{% url 'member_detail' obj.id %}" class ="block w-64 h-64 mx-auto" style ="background-image : url({{obj.img.url}}); background-size: cover;">
+              </a>
+              <div class="p-5 w-1/2 md:text-center">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="{% url 'member_detail' obj.id %}">{{obj.name}}</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">{{obj.position}}</span>
+              </div>
+          </div> 
+        {% endfor %}
+      </div>  
+  </div>
+</section>
+{% endblock contents %}

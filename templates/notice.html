@@ -21,7 +21,7 @@
 {% block contents %}
 <!-- 여기 위까지 header 파일로 분리하면 됩니다. -->
     <div class="board-view">
-            <div class="container">
+            <div class="container_de">
                 <h2>
                     {% if post.tag == "공지" %}
                         <span class="category category-1">
@@ -63,10 +63,10 @@
                         <a onclick="delete_post({{ post.id }})">삭제</a>
                     {% endif %}
                 </div>
-            </div> <!-- container -->
+            </div> <!-- container_de -->
         </div> <!-- board-view -->
         <div class="board-comment">
-            <div class="container">
+            <div class="container_de">
                 <div class="comment-count">
                     <strong>{{ comments|length }}</strong>개 댓글
                 </div>

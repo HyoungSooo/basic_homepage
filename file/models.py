@@ -1,6 +1,6 @@
 from django.db import models
 from board.models import Board
-from post.models import PostNotice, PostActivity, PostFree, PostShare, PostStudy, PostJokbo
+from post.models import PostNotice, PostActivity, PostNews,PostOutstanding
 import time
 
 
@@ -23,24 +23,10 @@ class FileActivity(models.Model):
 
 class FileFree(models.Model):
     token = models.CharField(max_length=200)
-    post = models.ForeignKey(PostFree, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(PostNews, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to=make_filename)
-
-
-class FileShare(models.Model):
-    token = models.CharField(max_length=200)
-    post = models.ForeignKey(PostShare, on_delete=models.CASCADE, null=True)
-    file = models.FileField(upload_to=make_filename)
-
 
 class FileStudy(models.Model):
     token = models.CharField(max_length=200)
-    post = models.ForeignKey(PostStudy, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(PostOutstanding, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to=make_filename)
-
-
-class FileJokbo(models.Model):
-    token = models.CharField(max_length=200)
-    post = models.ForeignKey(PostJokbo, on_delete=models.CASCADE, null=True)
-    file = models.FileField(upload_to=make_filename)
-

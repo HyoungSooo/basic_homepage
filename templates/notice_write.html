@@ -18,7 +18,7 @@
 
 {% block contents %}
     <div class="board-write">
-        <div class="container">
+        <div class="container_de">
             <form action="/post/{{ board }}/write/" method="post" enctype="multipart/form-data" class="classic-form write-form" data-file-action="/file/notice/">
                 {% csrf_token %}
                 <input type="hidden" name="dropzone-token" id="dropzone-token" value="{{ random_str }}">
@@ -42,6 +42,6 @@
                     <button type="submit">작성</button>
                 </div>
             </form>
-        </div> <!-- container -->
+        </div> <!-- container_de -->
     </div> <!-- board-view -->
 {% endblock %}

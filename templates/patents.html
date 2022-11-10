@@ -1,0 +1,54 @@
+{% extends 'base-with-banner.html' %}
+
+{% block boardImg %}'/static/img/signin.jpg'{% endblock %}
+{% block boardTitle %}Papers{% endblock %}
+{% block boardSubTitle %}{% endblock %}
+
+{% block contents %}
+  {% for obj_ in patents %}
+  {% for key, value in obj_.items %}
+  <div class = "container_de mt-4">
+    <h3 class="text-3xl font-bold dark:text-white mb-10 mt-4">{{key}}</h3>
+    <div class="overflow-x-auto relative">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="py-3 px-6 rounded-l-lg w-4/6">
+                      title
+                  </th>
+                  <th scope="col" class="py-3 px-6 w-1/6">
+                      year
+                  </th>
+                  <th scope="col" class="py-3 px-6 rounded-r-lg w-1/6">
+                      ordering
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+                {% for obj in value %}
+              <tr class="bg-white dark:bg-gray-800 w-full">
+                  <th scope="row" class="block w-full py-4 px-6 font-medium text-gray-900 break-all dark:text-white">
+                      {{obj.title}}
+                  </th>
+                  <td class="py-4 px-6">
+                      {{key}}
+                  </td>
+                  <td class="py-4 px-6">
+                      {{obj.ordering}}
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+
+
+
+
+
+
+
+{% endblock contents %}

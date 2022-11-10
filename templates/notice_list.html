@@ -11,7 +11,7 @@
 {% block contents %}
 <!-- 여기 위까지 header 파일로 분리하면 됩니다. -->
     <div class="board">
-        <div class="container">
+        <div class="container_de">
             <ul class="posts">
                 {% for post in posts %}
                     <li class="post-article">
@@ -30,9 +30,9 @@
                                         <span class="category category-3">
                                             대회
                                         </span>
-                                    {% elif post.tag == "공모전" %}
+                                    {% elif post.tag == "News" %}
                                         <span class="category category-4">
-                                            프젝
+                                            News
                                         </span>
                                     {% else %}
                                         <span class="category category-1">
@@ -59,9 +59,9 @@
                             </ul>
                         </div> <!-- post-container -->
                         {% if post.imageLink != "/static/img/sample/document-icon.png" %}
-                        <div class="post-image">
+                        <div class="post-image w-full h-full" style = "background-image : url({{post.imageLink}}); background-size:contain; background-repeat :no-repeat;">
                             <a href="/post/{{ board }}/{{ post.id }}">
-                                <img src="{{ post.imageLink }}">
+                                {% comment %} <img src="{{ post.imageLink }}"> {% endcomment %}
                             </a>
                         </div>
                         {% endif %}

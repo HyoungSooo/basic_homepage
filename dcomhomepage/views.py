@@ -1,18 +1,28 @@
 from django.shortcuts import render
-from post.models import PostNotice, PostActivity, PostShare, PostFree
+from post.models import PostNotice, PostActivity, PostNews, PostOutstanding
+from journal.models import Research
 
 
 def index(request):
     activities = PostActivity.objects.filter(parent=None).order_by('-id')[:8]
     notices = PostNotice.objects.filter(parent=None).order_by('-id')[:5]
-    shares = PostShare.objects.filter(parent=None).order_by('-id')[:5]
-    frees = PostFree.objects.filter(parent=None).order_by('-id')[:5]
-    return render(request, 'index.html', {
-        'activities': activities,
-        'notices': notices,
-        'shares': shares,
-        'frees': frees
-    })
+    shares = PostOutstanding.objects.filter(parent=None).order_by('-id')[:5]
+    frees = PostNews.objects.filter(parent=None).order_by('-id')[:5]
+    context = {
+      'activities': activities,
+      'notices': notices,
+      'shares': shares,
+      'frees': frees
+    }
+    id_control = 'research'
+    cnt = 1
+
+    p = Research.objects.all()
+
+    for i in p:
+        context[id_control + str(cnt)] = i
+        cnt += 1
+    return render(request, 'index.html', context = context)
 
 
 def policy(request):

@@ -3,9 +3,9 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseBadRequest, HttpResponseNotAllowed
 from user.models import Profile
-from post.models import PostNotice, PostActivity, PostFree, PostJokbo, PostShare, PostStudy, PostStudyMember
+from post.models import PostNotice, PostActivity, PostNews, PostOutstanding, PostOutstandingMember
 from post.form import PostForm
-from file.models import FileNotice, FileActivity, FileFree, FileJokbo, FileShare, FileStudy
+from file.models import FileNotice, FileActivity, FileFree, FileStudy
 from dcomhomepage.utils import make_random_string
 
 
@@ -249,8 +249,8 @@ def activity_list(request, page=1):
 
     return render(request, 'notice_list.html', {
         'board': 'activity',
-        'board_title': 'Club Activities',
-        'board_subtitle': '동아리 활동 내역입니다.',
+        'board_title': 'Lab Activities',
+        'board_subtitle': '연구실 활동 내역입니다.',
         'posts': list_var,
         'current_page': page,
         'pages': pages,
@@ -356,12 +356,12 @@ def free_detail(request, post_id):
         raise PermissionDenied
 
     try:
-        post_obj = PostFree.objects.get(pk=post_id)
+        post_obj = PostNews.objects.get(pk=post_id)
         post_obj.hit += 1
         post_obj.save()
 
         if post_obj.parent is None:
-            comment = PostFree.objects.filter(parent=post_obj).values()
+            comment = PostNews.objects.filter(parent=post_obj).values()
             list_var = list(comment)
             depth = 0
 
@@ -373,7 +373,7 @@ def free_detail(request, post_id):
                 for i in range(len(list_var)):
                     if list_var[i]['depth'] == depth:
                         check = True
-                        sub_comment = list(PostFree.objects.filter(parent_id=list_var[i]['id']).values())
+                        sub_comment = list(PostNews.objects.filter(parent_id=list_var[i]['id']).values())
 
                         list_var = list_var[:i+temp+1] + sub_comment + list_var[i+temp+1:]
                         temp += len(sub_comment)
@@ -383,8 +383,8 @@ def free_detail(request, post_id):
 
             return render(request, 'notice.html', {
                 'board': 'free',
-                'board_title': 'Free Board',
-                'board_subtitle': '자유 게시판 입니다.',
+                'board_title': 'News Board',
+                'board_subtitle': '',
                 'post': post_obj,
                 'comments': list_var,
                 'commentForm': PostForm()
@@ -396,7 +396,7 @@ def free_detail(request, post_id):
 
 
 def free_list(request, page=1):
-    post_obj = PostFree.objects.filter(parent=None).order_by('-id')
+    post_obj = PostNews.objects.filter(parent=None).order_by('-id')
     obj_num = post_obj.count()
 
     pages = ((obj_num-1) // 5) + 1
@@ -420,8 +420,8 @@ def free_list(request, page=1):
 
     return render(request, 'notice_list.html', {
         'board': 'free',
-        'board_title': 'Free Board',
-        'board_subtitle': '자유 게시판 입니다.',
+        'board_title': 'News Board',
+        'board_subtitle': '',
         'posts': list_var,
         'current_page': page,
         'pages': pages,
@@ -442,22 +442,21 @@ def free_post(request):
         try:
             require_keys = ('title', 'content', 'tag')
             if all(i in request.POST for i in require_keys):
-                post_obj = PostFree.objects.create(
+                post_obj = PostNews.objects.create(
                     title=request.POST['title'],
                     content=request.POST['content'],
                     userIdx=request.user,
-                    tag=request.POST['tag']
                 )
                 return redirect('/post/free/{}'.format(post_obj.pk))
             else:
                 return HttpResponseBadRequest("Error During Error Processing")
-        except PostFree.DoesNotExist:
+        except PostNews.DoesNotExist:
             raise Http404
     else:
         return render(request, "notice_write.html", {
             'board': 'free',
-            'board_title': 'Free Board',
-            'board_subtitle': '자유 게시판 입니다.',
+            'board_title': 'News Board',
+            'board_subtitle': '',
             'form': PostForm()
         })
 
@@ -473,9 +472,9 @@ def free_comment(request, post_id):
         try:
             require_keys = ('content',)
             if all(i in request.POST for i in require_keys):
-                parent_post = PostFree.objects.get(pk=post_id)
+                parent_post = PostNews.objects.get(pk=post_id)
 
-                post = PostFree.objects.create(
+                post = PostNews.objects.create(
                     content=request.POST['content'],
                     parent=parent_post,
                     userIdx=request.user
@@ -490,7 +489,7 @@ def free_comment(request, post_id):
                 return redirect('/post/free/{}'.format(root.pk))
             else:
                 return HttpResponseBadRequest("Key Error")
-        except PostFree.DoesNotExist:
+        except PostNews.DoesNotExist:
             raise Http404
     else:
         raise HttpResponseNotAllowed
@@ -499,7 +498,7 @@ def free_comment(request, post_id):
 @login_required
 def free_delete(request, post_id):
     try:
-        post = PostFree.objects.get(pk=post_id)
+        post = PostNews.objects.get(pk=post_id)
         parent = post.parent
 
         if post.userIdx == request.user:
@@ -515,7 +514,7 @@ def free_delete(request, post_id):
                 post.delete()
                 return redirect('/post/free/list')
 
-    except PostFree.DoesNotExist:
+    except PostNews.DoesNotExist:
         raise Http404
 
 
@@ -527,12 +526,12 @@ def study_detail(request, post_id):
         raise PermissionDenied
 
     try:
-        post_obj = PostStudy.objects.get(pk=post_id)
+        post_obj = PostOutstanding.objects.get(pk=post_id)
         post_obj.hit += 1
         post_obj.save()
 
         if post_obj.parent is None:
-            comment = PostStudy.objects.filter(parent=post_obj).values()
+            comment = PostOutstanding.objects.filter(parent=post_obj).values()
             list_var = list(comment)
             depth = 0
 
@@ -544,7 +543,7 @@ def study_detail(request, post_id):
                 for i in range(len(list_var)):
                     if list_var[i]['depth'] == depth:
                         check = True
-                        sub_comment = list(PostStudy.objects.filter(parent_id=list_var[i]['id']).values())
+                        sub_comment = list(PostOutstanding.objects.filter(parent_id=list_var[i]['id']).values())
 
                         list_var = list_var[:i+temp+1] + sub_comment + list_var[i+temp+1:]
                         temp += len(sub_comment)
@@ -552,13 +551,13 @@ def study_detail(request, post_id):
                 if check is False:
                     break
 
-            member = PostStudyMember.objects.filter(studyIdx=post_obj).values('userIdx')
+            member = PostOutstandingMember.objects.filter(studyIdx=post_obj).values('userIdx')
             member_profile = Profile.objects.filter(user__in=member)
 
             return render(request, 'study.html', {
                 'board': 'study',
-                'board_title': 'Study Board',
-                'board_subtitle': '스터디 게시판 입니다.',
+                'board_title': 'Outstanding Board',
+                'board_subtitle': '',
                 'post': post_obj,
                 'comments': list_var,
                 'commentForm': PostForm(),
@@ -566,12 +565,12 @@ def study_detail(request, post_id):
             })
         else:
             raise PermissionDenied
-    except PostStudy.DoesNotExist:
+    except PostOutstanding.DoesNotExist:
         raise Http404
 
 
 def study_list(request, page=1):
-    post_obj = PostStudy.objects.filter(parent=None).order_by('-id')
+    post_obj = PostOutstanding.objects.filter(parent=None).order_by('-id')
     obj_num = post_obj.count()
 
     pages = ((obj_num-1) // 5) + 1
@@ -595,8 +594,8 @@ def study_list(request, page=1):
 
     return render(request, 'study_list.html', {
         'board': 'study',
-        'board_title': 'Study Board',
-        'board_subtitle': '스터디 게시판 입니다.',
+        'board_title': 'Outstanding Board',
+        'board_subtitle': '',
         'posts': list_var,
         'current_page': page,
         'pages': pages,
@@ -617,7 +616,7 @@ def study_post(request):
         try:
             require_keys = ('title', 'content', 'tag', 'start_date', 'end_date', 'time')
             if all(i in request.POST for i in require_keys):
-                post_obj = PostStudy.objects.create(
+                post_obj = PostOutstanding.objects.create(
                     title=request.POST['title'],
                     content=request.POST['content'],
                     userIdx=request.user,
@@ -629,14 +628,14 @@ def study_post(request):
                 return redirect('/post/study/{}'.format(post_obj.pk))
             else:
                 return HttpResponseBadRequest("Error During Error Processing")
-        except PostStudy.DoesNotExist:
+        except PostOutstanding.DoesNotExist:
             raise Http404
     else:
 
         return render(request, "study_write.html", {
             'board': 'study',
-            'board_title': 'Study Board',
-            'board_subtitle': '스터디 게시판 입니다.',
+            'board_title': 'Outstanding Board',
+            'board_subtitle': '',
             'form': PostForm(),
             'random_str': make_random_string()
         })
@@ -653,9 +652,9 @@ def study_comment(request, post_id):
         try:
             require_keys = ('content',)
             if all(i in request.POST for i in require_keys):
-                parent_post = PostStudy.objects.get(pk=post_id)
+                parent_post = PostOutstanding.objects.get(pk=post_id)
 
-                post = PostStudy.objects.create(
+                post = PostOutstanding.objects.create(
                     content=request.POST['content'],
                     parent=parent_post,
                     userIdx=request.user
@@ -670,7 +669,7 @@ def study_comment(request, post_id):
                 return redirect('/post/study/{}'.format(root.pk))
             else:
                 return HttpResponseBadRequest("Key Error")
-        except PostStudy.DoesNotExist:
+        except PostOutstanding.DoesNotExist:
             raise Http404
     else:
         raise HttpResponseNotAllowed
@@ -679,7 +678,7 @@ def study_comment(request, post_id):
 @login_required
 def study_delete(request, post_id):
     try:
-        post = PostStudy.objects.get(pk=post_id)
+        post = PostOutstanding.objects.get(pk=post_id)
         parent = post.parent
 
         if post.userIdx == request.user:
@@ -697,7 +696,7 @@ def study_delete(request, post_id):
         else:
             raise PermissionDenied
 
-    except PostStudy.DoesNotExist:
+    except PostOutstanding.DoesNotExist:
         raise Http404
 
 
@@ -709,13 +708,13 @@ def study_join(request, post_id):
         raise PermissionDenied
 
     try:
-        post = PostStudy.objects.get(pk=post_id)
-        study_member = PostStudyMember.objects.create(
+        post = PostOutstanding.objects.get(pk=post_id)
+        study_member = PostOutstandingMember.objects.create(
             userIdx=request.user,
             studyIdx=post
         )
         return redirect('/post/study/{}'.format(post.pk))
-    except PostStudy.DoesNotExist:
+    except PostOutstanding.DoesNotExist:
         raise Http404
 
 
